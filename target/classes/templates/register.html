@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Kullanıcı Kayıt</title>
+</head>
+<body>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">AnaSayfa</a></li>
+    </ul>
+</nav>
+
+<div sec:authorize="isAuthenticated()">
+    <meta http-equiv="refresh" content="0;url=/" />
+</div>
+<form th:action="@{/register}" th:object="${user}" method="post">
+    <table>
+        <tr>
+            <td>Kullanıcı Adı:</td>
+            <td><input type="text" th:field="*{username}" /></td>
+            <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Nick Hatası</td>
+            <td th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}">Genel hata</td>
+        </tr>
+        <tr>
+            <td>Şifre:</td>
+            <td><input type="password" th:field="*{password}" /></td>
+            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Şifre hatası..</td>
+        </tr>
+        <tr>
+            <td>İsim:</td>
+            <td><input type="text" th:field="*{name}" /></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">İsim hatası..</td>
+        </tr>
+        <tr>
+            <td>Soy isim:</td>
+            <td><input type="text" th:field="*{lastName}" /></td>
+            <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Soy isim hatası..</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Gönder</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

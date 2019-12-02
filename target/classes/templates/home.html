@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>...</title>
+</head>
+<body>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">AnaSayfa</a></li>
+        <li><a href="/users">Kullanıcılar</a></li>
+       
+    </ul>
+</nav>
+
+<div sec:authorize="isAnonymous()">
+    <h1>SpringBootNoteApp'a Hoşgeldiniz!</h1>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <h1 th:text="'Hoşgeldin.., ' + ${user.username} + '!'"></h1>
+</div>
+
+<div sec:authorize="isAnonymous()">
+    <p>Buraya <a th:href="@{/login}">tıkla</a> Giriş.</p>
+    <p>Buraya <a th:href="@{/register}">tıkla</a> Kayıt.</p>
+</div>
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Log Out"/>
+    </form>
+    
+</div>
+</body>
+</html>

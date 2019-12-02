@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+ 
+</head>
+<body>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">AnaSayfa</a></li>
+       
+    </ul>
+</nav>
+
+<table>
+    <tr>
+        <th>kullanıcı adı</th>
+        <th>isim</th>
+        <th>soy isim</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td><a th:href="@{/users/} + ${user.id} + @{/items}" th:text="${user.username}">Nick</a></td>
+        <td th:text="${user.name}">İsim</td>
+        <td th:text="${user.lastName}">Soy isim</td>
+    </tr>
+</table>
+</body>
+</html>
