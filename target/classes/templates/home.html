@@ -8,12 +8,15 @@
     <ul>
         <li><a href="/">AnaSayfa</a></li>
         <li><a href="/users">Kullanıcılar</a></li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/users/} + ${user.id} + @{/items}">Benim Notlarım</a>
+        </li>
        
     </ul>
 </nav>
 
 <div sec:authorize="isAnonymous()">
-    <h1>SpringBootNoteApp'a Hoşgeldiniz!</h1>
+    <h1>SpringBootNoteApp'a Hoşgeldin Ziyaretci..</h1>  
 </div>
 
 <div sec:authorize="isAuthenticated()">
@@ -24,9 +27,16 @@
     <p>Buraya <a th:href="@{/login}">tıkla</a> Giriş.</p>
     <p>Buraya <a th:href="@{/register}">tıkla</a> Kayıt.</p>
 </div>
+
+  
+
 <div sec:authorize="isAuthenticated()">
+ <a href="/items/add">Not Ekleyin..</a><br/><br/>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Log Out"/>
+     
+   
+
     </form>
     
 </div>

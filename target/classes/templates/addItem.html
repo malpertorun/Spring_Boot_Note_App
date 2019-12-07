@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Not Ekle</title>
+</head>
+<body>
+	<nav role="navigation">
+		<ul>
+			<li><a href="/">Anasayfa</a></li>
+			
+		</ul>
+	</nav>
+
+	<form th:action="@{/items}" th:object="${itemForm}" th:method="post">
+		<table>
+			<tr>
+				<td>Not Girin:</td>
+				<td><input type="text" th:field="*{itemType}" /></td>
+				<td th:if="${#fields.hasErrors('itemType')}" th:errors="*{itemType}">Not tip hatasi</td>
+			</tr>
+			
+			<tr>
+			<td>Ekleyen Kişi: </td>
+				 <td><select th:field="*{assingUser}">
+						<option th:each="username : ${usernames}" th:value="${username}"
+							th:text="${username}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><button type="submit">Ekle</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

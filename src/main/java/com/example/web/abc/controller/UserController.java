@@ -1,6 +1,5 @@
 package com.example.web.abc.controller;
 
-
 import com.example.web.abc.domain.User;
 import com.example.web.abc.domain.validator.RegisterValidator;
 import com.example.web.abc.service.UserService;
@@ -49,6 +48,12 @@ public class UserController {
     public ModelAndView getUsersPage() {
         return new ModelAndView("users", "users", userService.getUsers());
     }
-
+    @RequestMapping(value = "/users/{id}/items", method = RequestMethod.GET)
+    public ModelAndView getUserPage(@PathVariable Long id) {
+        if (null == userService.getUserById(id))
+            throw new NoSuchElementException("User with id:" + id + " not found");
+        else
+            return new ModelAndView("userItems" ,"items", userService.numberOfItemsByType(id));
+    }
   
 }

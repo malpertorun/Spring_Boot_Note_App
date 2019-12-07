@@ -4,13 +4,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 
@@ -39,6 +38,8 @@ public class User implements UserDetails {
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Item> items;
    
     public User() {
 
@@ -113,7 +114,13 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-  
+    public Set<Item> getItems() {
+        return items;
+    }
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+
 
     @Override
     public String toString() {

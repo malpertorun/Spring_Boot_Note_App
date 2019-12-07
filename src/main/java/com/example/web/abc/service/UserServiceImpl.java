@@ -1,6 +1,6 @@
 package com.example.web.abc.service;
 
-
+import com.example.web.abc.domain.Item;
 import com.example.web.abc.domain.User;
 import com.example.web.abc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findAll();
     }
 
-   
+    public Map<String, List<Item>> numberOfItemsByType(long userId) {
+        Map<String, List<Item>> map = new HashMap<String, List<Item>>();
+        Set<Item> items = getUserById(userId).getItems();
+
+        for (Item item: items) {
+            List<Item> itemList = new ArrayList<Item>();
+            String key = item.getType().toLowerCase();
+
+            if (map.containsKey(key))
+                itemList = map.get(key);
+
+            itemList.add(item);
+            map.put(key, itemList);
+        }
+
+        return map;
+    }
 
     public List<String> getUsernames() {
         List<String> usernames = new ArrayList<String>();

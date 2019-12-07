@@ -23,7 +23,11 @@ public class Application implements CommandLineRunner {
     public void run(String... strings) throws Exception {
       
     	
+    	User user1 = new User("qqq", "qqqqqq");
+        user1.setName("Alper");
+        user1.setLastName("Torun");
     
+        userRepository.save(user1);
 
     }
 }
